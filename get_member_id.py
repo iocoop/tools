@@ -9,8 +9,8 @@ logging.basicConfig(level=logging.INFO)
 parser = argparse.ArgumentParser(description='Determine a freshbooks client_id from a client email address')
 parser.add_argument('email_address', nargs='*',
                    help='email address to search for')
-parser.add_argument('--config', '-c', dest='config', default='freshbooks.cfg',
-                   help='config file name (default: freshbooks.cfg)')
+parser.add_argument('--config', '-c', dest='config', default='/etc/freshbooks.cfg',
+                   help='config file name (default: /etc/freshbooks.cfg)')
 
 args = parser.parse_args()
 
@@ -40,7 +40,8 @@ for page in range(2, int(client_response.clients.attrib['pages']) + 2):
                     client_ids[email_address][client.first_name + ' ' + client.last_name + ' : ' + client.organization] = client.client_id
         else:
             # logging.info("%s '%s' '%s %s'" % (str(client.email).lower(), client.organization, client.first_name, client.last_name))
-            logging.info(str(client.email).lower())
+            #logging.info(str(client.email).lower())
+            print '"%s", "%s %s", "%s"' % (str(client.email).lower(), client.first_name, client.last_name, client.organization)
 
     logging.debug('page %s' % page)
     client_response = c.client.list(page=page)
