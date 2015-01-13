@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from refreshbooks import api
 import ConfigParser
 import argparse
