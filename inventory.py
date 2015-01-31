@@ -14,9 +14,6 @@ import gspread
 from django.conf import settings
 
 
-WORKSHEETS = ['SCL-001.M03.01', 'SCL-001.M03.02', 'SCL-001.M03.03', 'MSP']
-
-
 def authorize(email, keyfile, scope, secret=None):
   '''
   Authenticate to Google Drive and return an authorization.
@@ -42,7 +39,7 @@ def get_client_systems(freshbooks_id):
   if client:
     spreadsheet = client.open('IO Cooperative Colo Inventory')
     systems = []
-    for sheet in WORKSHEETS:
+    for sheet in settings.GSPREAD_WORKSHEETS:
       worksheet = spreadsheet.worksheet(sheet)
       records = worksheet.get_all_records()
       for record in records:
