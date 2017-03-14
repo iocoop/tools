@@ -44,7 +44,11 @@ for page in range(2, int(recurring_response.recurrings.attrib['pages']) + 2):
         if recurring.stopped == 0:
             #logging.info("%s: %s '%s' '%s %s'" % (recurring.recurring_id, , clients[recurring.client_id], recurring.organization, recurring.first_name, recurring.last_name))
             #logging.info("%s" % clients[recurring.client_id].email)
-            print '"%s", "%s", "%s %s", "%s"' % (recurring.recurring_id, str(clients[recurring.client_id].email).lower(), clients[recurring.client_id].first_name, clients[recurring.client_id].last_name, clients[recurring.client_id].organization)
+            print '"%s","%s","%s %s","%s"' % (recurring.recurring_id,
+                                              str(clients[recurring.client_id].email).lower(),
+                                              clients[recurring.client_id].first_name,
+                                              clients[recurring.client_id].last_name,
+                                              clients[recurring.client_id].organization)
     logging.debug('page %s' % page)
     recurring_response = c.recurring.list(page=page)
 #pprint.pprint(client_ids)
